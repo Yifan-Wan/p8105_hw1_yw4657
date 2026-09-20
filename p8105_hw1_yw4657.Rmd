@@ -11,11 +11,11 @@ library(ggplot2)
 
 # Problem 1
 
-```{r}
+```{r load_data}
 data("penguins", package = "palmerpenguins")
 ```
 
-```{r, eval=FALSE}
+```{r check, eval=FALSE}
 names(penguins)
 nrow(penguins)
 ncol(penguins)
@@ -28,7 +28,7 @@ Archipelago. Important variables include `species`, `island`,
 `sex`, and `year`. The dataset contains `r nrow(penguins)` observations
 and `r ncol(penguins)` variables. The mean flipper length is `r round(mean(pull(penguins, flipper_length_mm), na.rm = TRUE), 2)` mm.
 
-```{r, warning=FALSE}
+```{r ggplot, warning=FALSE}
 plot1 <- ggplot(penguins, aes(x = bill_length_mm, 
                            y = flipper_length_mm, 
                            color = species)) + geom_point()
@@ -36,13 +36,13 @@ plot1 <- ggplot(penguins, aes(x = bill_length_mm,
 plot1
 ```
 
-```{r, warning=FALSE}
+```{r ggsave, warning=FALSE}
 ggsave("penguins_scatterplot.png", plot = plot1)
 ```
 
 # Problem 2
 
-```{r}
+```{r mean}
 set.seed(123)
 
 sample = rnorm(10)
@@ -54,9 +54,7 @@ character_var = c("A", "B", "C", "D", "E",
 
 factor_var = factor(c("low", "medium", "high", "low", "medium",
                       "high", "low", "medium", "high", "low"))
-```
 
-```{r}
 df = data.frame(
   sample = sample,
   logical_var = logical_var,
@@ -88,3 +86,16 @@ Character values cannot be averaged because they are not numeric.
 Although factors have internal numeric codes, a factor itself is not
 a numeric variable, so its mean cannot be calculated directly.
 
+```{r coercion, eval=FALSE}
+as.numeric(pull(df, logical_var))
+as.numeric(pull(df, character_var))
+as.numeric(pull(df, factor_var))
+```
+
+Converting the logical variable to numeric produces 1s and 0s,
+which explains why its mean can be calculated. Converting the
+character variable produces `NA` values because the character
+values are not numeric. Converting the factor produces its internal
+numeric level codes rather than the original factor labels. These
+results help explain why the numeric and logical variables can be
+averaged directly, whereas the character and factor variables cannot.
