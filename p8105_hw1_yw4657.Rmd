@@ -3,7 +3,7 @@ title: "p8105_hw1_yw4657"
 output: github_document
 ---
 
-```{r}
+```{r, message=FALSE}
 library(tidyverse)
 ```
 
@@ -12,7 +12,9 @@ Problem 1
 
 ```{r}
 data("penguins", package = "palmerpenguins")
+```
 
+```{r, eval=FALSE}
 names(penguins)
 nrow(penguins)
 ncol(penguins)
