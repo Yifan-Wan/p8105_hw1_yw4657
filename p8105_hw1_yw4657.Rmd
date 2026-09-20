@@ -8,7 +8,7 @@ library(tidyverse)
 ```
 
 
-Problem 1
+# Problem 1
 
 ```{r}
 data("penguins", package = "palmerpenguins")
@@ -26,3 +26,19 @@ Archipelago. Important variables include `species`, `island`,
 `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`,
 `sex`, and `year`. The dataset contains `r nrow(penguins)` observations
 and `r ncol(penguins)` variables. The mean flipper length is `r round(mean(pull(penguins, flipper_length_mm), na.rm = TRUE), 2)` mm.
+
+```{r}
+library(ggplot2)
+
+plot1 <- ggplot(penguins, aes(x = bill_length_mm, 
+                           y = flipper_length_mm, 
+                           color = species)) +
+  geom_point()
+
+plot1
+```
+
+```{r}
+ggsave("penguins_scatterplot.png", plot = plot1)
+```
+
