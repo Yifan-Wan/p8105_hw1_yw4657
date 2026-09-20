@@ -31,8 +31,7 @@ and `r ncol(penguins)` variables. The mean flipper length is `r round(mean(pull(
 ```{r, warning=FALSE}
 plot1 <- ggplot(penguins, aes(x = bill_length_mm, 
                            y = flipper_length_mm, 
-                           color = species)) +
-  geom_point()
+                           color = species)) + geom_point()
 
 plot1
 ```
@@ -40,4 +39,52 @@ plot1
 ```{r, warning=FALSE}
 ggsave("penguins_scatterplot.png", plot = plot1)
 ```
+
+# Problem 2
+
+```{r}
+set.seed(123)
+
+sample = rnorm(10)
+
+logical_var = sample > 0
+
+character_var = c("A", "B", "C", "D", "E",
+                  "F", "G", "H", "I", "J")
+
+factor_var = factor(c("low", "medium", "high", "low", "medium",
+                      "high", "low", "medium", "high", "low"))
+```
+
+```{r}
+df = data.frame(
+  sample = sample,
+  logical_var = logical_var,
+  character_var = character_var,
+  factor_var = factor_var
+)
+```
+
+```{r}
+mean(pull(df, sample))
+```
+
+```{r}
+mean(pull(df, logical_var))
+```
+
+```{r, warning=FALSE}
+mean(pull(df, character_var))
+```
+
+```{r, warning=FALSE}
+mean(pull(df, factor_var))
+```
+
+The mean can be calculated for the numeric and logical variables,
+but not for the character or factor variables. The logical variable
+can be averaged because R treats `TRUE` as 1 and `FALSE` as 0.
+Character values cannot be averaged because they are not numeric.
+Although factors have internal numeric codes, a factor itself is not
+a numeric variable, so its mean cannot be calculated directly.
 
