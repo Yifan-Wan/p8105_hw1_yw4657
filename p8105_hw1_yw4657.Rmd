@@ -63,19 +63,10 @@ df = data.frame(
 )
 ```
 
-```{r}
+```{r, warning=FALSE}
 mean(pull(df, sample))
-```
-
-```{r}
 mean(pull(df, logical_var))
-```
-
-```{r, warning=FALSE}
 mean(pull(df, character_var))
-```
-
-```{r, warning=FALSE}
 mean(pull(df, factor_var))
 ```
 
