@@ -5,6 +5,7 @@ output: github_document
 
 ```{r, message=FALSE}
 library(tidyverse)
+library(ggplot2)
 ```
 
 
@@ -27,9 +28,7 @@ Archipelago. Important variables include `species`, `island`,
 `sex`, and `year`. The dataset contains `r nrow(penguins)` observations
 and `r ncol(penguins)` variables. The mean flipper length is `r round(mean(pull(penguins, flipper_length_mm), na.rm = TRUE), 2)` mm.
 
-```{r}
-library(ggplot2)
-
+```{r, warning=FALSE}
 plot1 <- ggplot(penguins, aes(x = bill_length_mm, 
                            y = flipper_length_mm, 
                            color = species)) +
@@ -38,7 +37,7 @@ plot1 <- ggplot(penguins, aes(x = bill_length_mm,
 plot1
 ```
 
-```{r}
+```{r, warning=FALSE}
 ggsave("penguins_scatterplot.png", plot = plot1)
 ```
 
